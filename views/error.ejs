@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Error</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: sans-serif;
+        background-color: rgb(20, 20, 20);
+        color: #fff;
+        font-size: 16px;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      #error-message {
+        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      #link {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        border: none;
+        outline: none;
+        color: #333;
+        background-color: #fff;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      #link:hover {
+        background-color: #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Error</h1>
+      <p id="error-message">An error occurred: <%= error %></p>
+      <a id="link" href="/">Back to root directory</a>
+    </div>
+  </body>
+</html>
