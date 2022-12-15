@@ -18,7 +18,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-//set a rate limit for the upload and download routes
 const limiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
     max: 2 // limit each IP to 2 requests per windowMs
@@ -27,6 +26,12 @@ const limiter = rateLimit({
 app.use('/upload', limiter);
 app.use('/download', limiter);
 
+const bandwidthLimiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 10000000 // limit each IP to 10MB per windowMs
+});
+
+app.use('/download', bandwidthLimiter);
 
 app.use((req, res, next) => {
     statusCodes = [404, 500, 400, 401, 403, 405, 406, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 421, 422, 423, 424, 425, 426, 428, 429, 431, 451, 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511];
