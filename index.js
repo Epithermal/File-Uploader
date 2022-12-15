@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const ejs = require('ejs');
-
+const rateLimit = require('express-rate-limit');
 
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -18,6 +18,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
+//set a rate limit for the upload and download routes
+const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 2 // limit each IP to 2 requests per windowMs
+});
+
+app.use('/upload', limiter);
+app.use('/download', limiter);
 
 
 app.use((req, res, next) => {
